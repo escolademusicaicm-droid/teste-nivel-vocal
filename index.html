@@ -1,2 +1,1288 @@
 <!DOCTYPE html>
-<html><body>placeholder</body></html>
+<!--
+  ============================================================
+  TESTE DE NÍVEL VOCAL COMPLETO — Keila Chrischner
+  Arquivo único e independente. Nao depende de imagem,
+  pasta ou internet (so da fonte do Google, que e opcional).
+
+  UNICO AJUSTE NECESSARIO:
+  procure   var CONFIG = { whatsapp: "55XXXXXXXXXXX" }
+  no inicio do <script> e troque pelo seu numero,
+  so digitos, com DDI e DDD. Exemplo: "5511988887777"
+
+  6 DIMENSOES AVALIADAS (peso no resultado final):
+  1. Percepcao auditiva ....... 22%
+  2. Tecnica vocal ............ 26%
+  3. Conhecimento musical ..... 14%
+  4. Pratica e performance .... 18%
+  5. Rotina e saude vocal ..... 10%
+  6. Extensao e conforto ...... 10%
+  ============================================================
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste de Nível Vocal Completo | Keila Chrischner</title>
+<meta name="description" content="Diagnóstico vocal completo em 6 dimensões: percepção auditiva, técnica, conhecimento musical, prática, rotina e extensão. Para alunos da Keila Chrischner.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2b1f33; --plum:#4a2c5e; --plum-deep:#331d42;
+  --gold:#c9962e; --gold-soft:#e3b04b;
+  --cream:#faf6ef; --paper:#ffffff; --line:#e8e0d4;
+  --ok:#2f7d5d; --err:#b3413f; --soft:#8a7a96;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Fraunces',serif;line-height:1.2}
+button{font-family:inherit}
+
+/* ---------- topo ---------- */
+.topbar{background:rgba(250,246,239,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.topbar-in{max-width:840px;margin:0 auto;padding:.85rem 1.3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{font-family:'Fraunces',serif;font-weight:700;color:var(--plum);font-size:1rem}
+.brand span{color:var(--gold)}
+.topbar-tag{font-size:.7rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--soft)}
+
+/* ---------- estrutura ---------- */
+.shell{max-width:840px;margin:0 auto;padding:2.1rem 1.3rem 4rem}
+.screen{display:none}
+.screen.active{display:block;animation:fade .35s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- intro ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:.45rem;background:rgba(201,150,46,.14);border:1px solid rgba(201,150,46,.4);color:#8a6719;font-size:.71rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;padding:.34rem .8rem;border-radius:999px;margin-bottom:1rem}
+.intro h1{font-size:clamp(1.7rem,4.4vw,2.5rem);color:var(--plum);margin-bottom:.85rem}
+.intro h1 em{color:var(--gold);font-style:italic}
+.intro p{color:#5d4d6b;font-size:1rem;margin-bottom:.85rem;max-width:660px}
+.warnbox{background:#fff8e6;border:1px solid #f0dca8;border-radius:14px;padding:.95rem 1.1rem;display:flex;gap:.75rem;align-items:flex-start;margin:1.2rem 0 1.5rem;font-size:.91rem;color:#755c15}
+.warnbox b{color:#5f4a10}
+.dims{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.6rem;margin-bottom:1.6rem}
+.dimcard{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:.8rem .9rem;display:flex;gap:.65rem;align-items:flex-start}
+.dimcard .n{flex:none;width:22px;height:22px;border-radius:50%;background:rgba(74,44,94,.09);color:var(--plum);font-size:.72rem;font-weight:700;display:grid;place-items:center;margin-top:.15rem}
+.dimcard b{display:block;font-size:.89rem;color:var(--plum);font-weight:600;line-height:1.3}
+.dimcard span{font-size:.78rem;color:#7d6b8c}
+.stepcard-note{font-size:.8rem;color:var(--soft);margin-top:1rem}
+
+/* ---------- botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.88rem 1.65rem;border-radius:999px;font-weight:600;font-size:.97rem;text-decoration:none;border:none;cursor:pointer;transition:.18s}
+.btn-primary{background:var(--plum);color:#fff;box-shadow:0 8px 22px rgba(74,44,94,.25)}
+.btn-primary:hover{background:var(--plum-deep);transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#fff;box-shadow:0 8px 22px rgba(201,150,46,.35)}
+.btn-gold:hover{background:var(--gold-soft);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--plum);border:1.5px solid rgba(74,44,94,.3)}
+.btn-ghost:hover{border-color:var(--plum);background:rgba(74,44,94,.05)}
+.btn-block{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+
+/* ---------- pergunta ---------- */
+.qcard{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:1.75rem;box-shadow:0 10px 30px rgba(74,44,94,.06)}
+.qtop{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.6rem;flex-wrap:wrap}
+.part{font-size:.7rem;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--gold)}
+.qcount{font-size:.76rem;color:var(--soft)}
+.progress{height:7px;background:#efe7d9;border-radius:99px;overflow:hidden;margin-bottom:1.45rem}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));border-radius:99px;transition:width .35s ease}
+.qtitle{font-size:clamp(1.08rem,2.5vw,1.35rem);color:var(--plum);margin-bottom:.4rem}
+.qhint{font-size:.88rem;color:#6b5a78;margin-bottom:1.1rem}
+
+/* ---------- áudio ---------- */
+.audio-box{text-align:center;margin:1rem 0 1.4rem}
+.audio-btn{width:92px;height:92px;border-radius:50%;background:linear-gradient(160deg,var(--gold) 0%,#b8842a 100%);color:#fff;border:none;cursor:pointer;font-size:1.7rem;box-shadow:0 12px 28px rgba(201,150,46,.34);transition:.2s;display:inline-flex;align-items:center;justify-content:center}
+.audio-btn:hover{transform:scale(1.05)}
+.audio-btn.playing{animation:pulseRing 1s ease-out infinite}
+@keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(201,150,46,.45)}100%{box-shadow:0 0 0 20px rgba(201,150,46,0)}}
+.audio-label{display:block;font-size:.82rem;color:#6b5a78;margin-top:.6rem;font-weight:600}
+.audio-box small{display:block;margin-top:.25rem;font-size:.76rem;color:#a294ae}
+
+/* ---------- opções ---------- */
+.options{display:flex;flex-direction:column;gap:.52rem}
+.opt{text-align:left;background:var(--paper);border:1.6px solid var(--line);border-radius:13px;padding:.88rem 1.05rem;font-size:.94rem;cursor:pointer;transition:.15s;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:.8rem}
+.opt:hover:not(:disabled){border-color:rgba(74,44,94,.55);background:#fdfbf6}
+.opt .k{font-size:.75rem;color:#a294ae;font-weight:700;min-width:1.3rem}
+.opt.correct{border-color:var(--ok);background:#eef8f2;color:#1f5c43}
+.opt.correct .k{color:var(--ok)}
+.opt.wrong{border-color:var(--err);background:#fdf0ef;color:#8c2f2d}
+.opt.wrong .k{color:var(--err)}
+.opt.sel{border-color:var(--plum);background:#f6f1fa}
+.feedback{border-radius:12px;padding:.82rem 1rem;font-size:.9rem;margin-top:.85rem;display:none}
+.feedback.show{display:block;animation:fade .25s ease both}
+.feedback.good{background:#eef8f2;border:1px solid #bfe3d1;color:#1f5c43}
+.feedback.bad{background:#fdf0ef;border:1px solid #f0c9c6;color:#8c2f2d}
+.qnav{margin-top:1.3rem;display:flex;justify-content:flex-end;gap:.6rem;align-items:center}
+.qnav .btn{min-width:140px}
+.qnav .back{background:none;border:none;color:var(--soft);font-size:.85rem;cursor:pointer;text-decoration:underline;padding:.4rem}
+
+/* ---------- extensão ---------- */
+.range-group{margin-bottom:1.2rem}
+.range-group h4{font-size:.74rem;letter-spacing:.9px;text-transform:uppercase;color:var(--soft);margin-bottom:.48rem;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:.38rem}
+.chip{background:var(--paper);border:1.4px solid var(--line);border-radius:10px;padding:.46rem .65rem;font-size:.8rem;font-weight:600;color:var(--plum);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.3rem}
+.chip:hover{border-color:var(--gold);background:#fffaf0}
+.chip.on{background:var(--plum);border-color:var(--plum);color:#fff}
+.chip .spk{font-size:.68rem;opacity:.7}
+.range-tip{font-size:.78rem;color:var(--soft);margin-top:.65rem}
+
+/* ---------- resultado ---------- */
+.result-head{text-align:center;margin-bottom:1.8rem}
+.level-badge{display:inline-block;background:rgba(201,150,46,.14);border:1px solid rgba(201,150,46,.45);color:#8a6719;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.34rem .9rem;border-radius:999px;margin-bottom:.8rem}
+.result-head h2{font-size:clamp(1.55rem,3.9vw,2.25rem);color:var(--plum);margin-bottom:.45rem}
+.result-head p{color:#5d4d6b;max-width:590px;margin:0 auto;font-size:.97rem}
+.scorecard{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:1.75rem;margin-bottom:1.1rem;box-shadow:0 10px 30px rgba(74,44,94,.06)}
+.score-top{display:flex;align-items:center;gap:1.8rem;flex-wrap:wrap;justify-content:center}
+.dial{width:158px;height:158px;border-radius:50%;display:grid;place-items:center;flex:none}
+.dial-in{width:122px;height:122px;border-radius:50%;background:var(--paper);display:grid;place-items:center;text-align:center}
+.dial-in b{font-family:'Fraunces',serif;font-size:2rem;color:var(--plum);line-height:1}
+.dial-in span{font-size:.65rem;text-transform:uppercase;letter-spacing:.8px;color:var(--soft);margin-top:.15rem}
+.score-legend{flex:1;min-width:250px}
+.radar-cap{font-size:.76rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--soft);margin-bottom:.5rem;text-align:center}
+#r-radar svg{display:block;margin:0 auto;max-width:100%;height:auto}
+.dimbars{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:.85rem 1.4rem;margin-top:1.5rem;padding-top:1.4rem;border-top:1px solid var(--line)}
+.bar-row .bar-top{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.26rem;gap:.5rem}
+.bar-row .bar-top b{color:var(--plum);font-weight:600}
+.bar-row .bar-top span{color:var(--soft);font-size:.76rem;white-space:nowrap}
+.track{height:8px;background:#efe7d9;border-radius:99px;overflow:hidden}
+.track i{display:block;height:100%;border-radius:99px;transition:width .8s ease}
+.block{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:1.55rem;margin-bottom:1.1rem}
+.block h3{font-size:1.08rem;color:var(--plum);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.block ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.block li{display:flex;gap:.55rem;font-size:.92rem;color:#4f4060}
+.block li .ico{flex:none}
+.ext-line{color:#4f4060;font-size:.94rem}
+.ext-sub{display:block;font-size:.83rem;color:var(--soft);margin-top:.45rem}
+
+/* leitura por dimensão */
+.det-item{border-bottom:1px solid var(--line);padding:.85rem 0}
+.det-item:last-child{border-bottom:none;padding-bottom:0}
+.det-item:first-child{padding-top:0}
+.det-head{display:flex;align-items:center;justify-content:space-between;gap:.7rem;margin-bottom:.2rem;flex-wrap:wrap}
+.det-head b{font-size:.9rem;color:var(--plum)}
+.det-head .lvl{font-size:.68rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:.18rem .55rem;border-radius:999px}
+.lvl.forte{background:rgba(47,125,93,.12);color:#1f5c43}
+.lvl.ok{background:rgba(201,150,46,.15);color:#8a6719}
+.lvl.fraco{background:rgba(179,65,63,.11);color:#a83b39}
+.det-item p{font-size:.87rem;color:#6b5a78}
+
+.foco{background:linear-gradient(165deg,var(--plum) 0%,var(--plum-deep) 100%);color:#fff;border:none}
+.foco h3{color:var(--gold-soft)}
+.foco .pill{display:inline-block;background:rgba(227,176,75,.2);color:var(--gold-soft);font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;margin-bottom:.72rem}
+.foco p{color:rgba(255,255,255,.88);font-size:.93rem;margin-bottom:.85rem}
+.foco ul{gap:.48rem;margin-bottom:1.15rem}
+.foco li{color:rgba(255,255,255,.9);font-size:.92rem}
+.foco .btnrow{display:flex;gap:.6rem;flex-wrap:wrap}
+.result-actions{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
+.toast{position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%) translateY(20px);background:var(--plum-deep);color:#fff;padding:.75rem 1.2rem;border-radius:999px;font-size:.85rem;opacity:0;pointer-events:none;transition:.3s;z-index:50;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:560px){
+  .qcard{padding:1.3rem}
+  .block,.scorecard{padding:1.25rem}
+  .dial{width:140px;height:140px}
+  .dial-in{width:108px;height:108px}
+  .dial-in b{font-size:1.75rem}
+  .qnav{flex-direction:column-reverse;align-items:stretch}
+  .qnav .btn{width:100%}
+}
+
+/* ---------- PORTÃO DE SENHA ---------- */
+#gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.2rem;background:linear-gradient(165deg,#4a2c5e 0%,#331d42 100%)}
+#gate.hide{display:none}
+.gate-card{background:#faf6ef;border-radius:22px;padding:2.1rem 1.7rem;max-width:380px;width:100%;text-align:center;box-shadow:0 22px 60px rgba(0,0,0,.38)}
+.gate-icon{font-size:2.1rem;margin-bottom:.5rem}
+#gate h2{font-family:'Fraunces',serif;color:#4a2c5e;font-size:1.35rem;margin-bottom:.45rem}
+#gate p{font-size:.9rem;color:#5d4d6b;margin-bottom:1.15rem;line-height:1.5}
+#gate input{width:100%;padding:.82rem 1rem;border:1.6px solid #e8e0d4;border-radius:12px;font-family:'Inter',sans-serif;font-size:1rem;text-align:center;margin-bottom:.75rem;background:#fff;color:#2b1f33}
+#gate input:focus{outline:none;border-color:#4a2c5e}
+#gate button{width:100%;padding:.88rem;border:none;border-radius:999px;background:#4a2c5e;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:.97rem;cursor:pointer;transition:.18s}
+#gate button:hover{background:#331d42}
+.gate-err{color:#b3413f;font-size:.84rem;margin:.65rem 0 0!important;min-height:1.15rem;font-weight:500}
+.gate-foot{font-size:.72rem;color:#9c8daa;margin-top:1rem!important;margin-bottom:0!important}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-icon">🔒</div>
+    <h2>Teste de Nível Vocal</h2>
+    <p>Área exclusiva para alunos da Keila.<br>Digite a senha que você recebeu.</p>
+    <input id="gate-pass" type="password" placeholder="Senha" autocomplete="off" inputmode="text">
+    <button type="button" id="gate-btn">Entrar</button>
+    <p class="gate-err" id="gate-err"></p>
+    <p class="gate-foot">Keila Chrischner · Preparadora Vocal</p>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Keila <span>Chrischner</span></div>
+    <div class="topbar-tag">Teste de nível · completo</div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- ================= INTRO ================= -->
+  <section class="screen active intro" id="scr-intro">
+    <span class="eyebrow">Para alunos · 10 minutos</span>
+    <h1>Seu nível vocal em <em>todo aspecto</em></h1>
+    <p>Não é um teste de "cantar bem ou mal". É o mapa completo do seu momento como cantor: o que você ouve, o que domina tecnicamente, o que sabe sobre música, como pratica, como cuida da voz e até onde ela chega com conforto.</p>
+    <p>Com esse mapa eu consigo montar o ciclo de aulas certo para você — em vez de exercício genérico que serve para todos e não resolve o seu caso.</p>
+
+    <div class="warnbox">
+      <span style="font-size:1.1rem">🎧</span>
+      <div><b>Use fones de ouvido.</b> A primeira parte tem áudio. Faça em lugar silencioso, sem pressa — pode repetir cada áudio quantas vezes quiser. E responda com honestidade: nota alta aqui não vale prêmio, vale diagnóstico certo.</div>
+    </div>
+
+    <div class="dims">
+      <div class="dimcard"><span class="n">1</span><div><b>Percepção auditiva</b><span>5 testes de ouvido com áudio</span></div></div>
+      <div class="dimcard"><span class="n">2</span><div><b>Técnica vocal</b><span>Afinação, apoio, agudo e divisão</span></div></div>
+      <div class="dimcard"><span class="n">3</span><div><b>Conhecimento musical</b><span>Tom, intervalo, escala</span></div></div>
+      <div class="dimcard"><span class="n">4</span><div><b>Prática e performance</b><span>Palco, grupo, ensaio, gravação</span></div></div>
+      <div class="dimcard"><span class="n">5</span><div><b>Rotina e saúde vocal</b><span>Aquecimento, hidratação, cuidado</span></div></div>
+      <div class="dimcard"><span class="n">6</span><div><b>Extensão e conforto</b><span>Até onde a voz vai sem forçar</span></div></div>
+    </div>
+
+    <div style="max-width:340px;margin-bottom:1.2rem">
+      <label for="in-aluno" style="display:block;font-size:.81rem;font-weight:700;color:var(--plum);margin-bottom:.32rem">Seu nome (opcional)</label>
+      <input id="in-aluno" type="text" placeholder="Para o resultado sair no seu nome" autocomplete="name" style="width:100%;padding:.72rem .82rem;border:1.5px solid var(--line);border-radius:11px;font-family:inherit;font-size:.94rem;background:var(--paper);color:var(--ink)">
+    </div>
+
+    <button class="btn btn-primary" id="btn-start">Começar o teste completo →</button>
+    <p class="stepcard-note">24 perguntas + teste de extensão · resultado detalhado na tela, com gráfico por dimensão.</p>
+  </section>
+
+  <!-- ================= PERGUNTAS ================= -->
+  <section class="screen" id="scr-quiz">
+    <div class="qcard">
+      <div class="qtop">
+        <span class="part" id="q-part">Parte 1 · Percepção</span>
+        <span class="qcount" id="q-count">1 de 24</span>
+      </div>
+      <div class="progress"><i id="q-bar"></i></div>
+
+      <h2 class="qtitle" id="q-title">—</h2>
+      <p class="qhint" id="q-hint"></p>
+
+      <div class="audio-box" id="q-audio" style="display:none">
+        <button class="audio-btn" id="btn-play" aria-label="Tocar áudio">▶</button>
+        <span class="audio-label" id="audio-label">Clique para ouvir</span>
+        <small id="audio-count">Pode ouvir quantas vezes quiser</small>
+      </div>
+
+      <div class="options" id="q-options"></div>
+      <div class="feedback" id="q-feedback"></div>
+
+      <div class="qnav">
+        <button class="back" id="btn-back">← voltar</button>
+        <button class="btn btn-primary" id="btn-next" disabled>Avançar →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXTENSÃO ================= -->
+  <section class="screen" id="scr-range">
+    <div class="qcard">
+      <div class="qtop">
+        <span class="part">Parte 6 · Extensão</span>
+        <span class="qcount">última etapa</span>
+      </div>
+      <div class="progress"><i style="width:96%"></i></div>
+
+      <h2 class="qtitle">Até onde sua voz chega com conforto?</h2>
+      <p class="qhint">Clique no 🔊 para ouvir cada nota. Marque a mais <strong>grave</strong> e a mais <strong>aguda</strong> que você canta sem apertar, sem forçar, sem gritar. Conforto real — é isso que define a extensão de trabalho.</p>
+
+      <div class="range-group">
+        <h4>Nota mais grave confortável</h4>
+        <div class="chips" id="chips-low"></div>
+      </div>
+
+      <div class="range-group">
+        <h4>Nota mais aguda confortável</h4>
+        <div class="chips" id="chips-high"></div>
+      </div>
+
+      <div class="range-group" style="margin-top:1.4rem">
+        <h4>Como você se sente no agudo hoje?</h4>
+        <div class="options" id="agudo-options"></div>
+      </div>
+
+      <div class="qnav">
+        <button class="btn btn-primary" id="btn-finish" disabled>Ver meu diagnóstico →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULTADO ================= -->
+  <section class="screen" id="scr-result">
+    <div class="result-head">
+      <span class="level-badge" id="r-badge">Nível</span>
+      <h2 id="r-title">—</h2>
+      <p id="r-sub">—</p>
+    </div>
+
+    <div class="scorecard">
+      <div class="score-top">
+        <div class="dial" id="r-dial">
+          <div class="dial-in"><div><b id="r-score">0</b><span>de 100</span></div></div>
+        </div>
+        <div class="score-legend">
+          <p class="radar-cap">Seu perfil nas 6 dimensões</p>
+          <div id="r-radar"></div>
+        </div>
+      </div>
+      <div class="dimbars" id="r-dimbars"></div>
+    </div>
+
+    <div class="block">
+      <h3>🎼 Sua extensão medida</h3>
+      <div class="ext-line" id="r-ext"></div>
+    </div>
+
+    <div class="block">
+      <h3>✅ O que você já conquistou</h3>
+      <ul id="r-strong"></ul>
+    </div>
+
+    <div class="block">
+      <h3>⚠️ Pontos de atenção</h3>
+      <ul id="r-weak"></ul>
+    </div>
+
+    <div class="block" id="r-det-block">
+      <h3>🧭 Leitura de cada dimensão</h3>
+      <div id="r-detalhe"></div>
+    </div>
+
+    <div class="block foco">
+      <span class="pill">Foco do próximo ciclo</span>
+      <h3 id="r-foco-title">—</h3>
+      <p id="r-foco-text">—</p>
+      <div id="r-alerta" style="display:none;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:13px;padding:.85rem 1rem;margin-bottom:1.1rem">
+        <p style="margin:0;font-size:.9rem;color:#fff" id="r-alerta-txt"></p>
+      </div>
+      <h4 style="font-family:'Fraunces',serif;font-size:.97rem;color:#fff;margin-bottom:.65rem">Seu plano de exercícios</h4>
+      <ul id="r-exercicios"></ul>
+      <div class="btnrow">
+        <button class="btn btn-gold" id="btn-send">Enviar resultado para a Keila</button>
+        <button class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.45)" id="btn-copy">Copiar resultado</button>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn btn-ghost" id="btn-restart">Refazer o teste</button>
+    </div>
+  </section>
+
+</div>
+
+<div style="text-align:center;font-size:.78rem;color:#9c8daa;padding:1.6rem 1.3rem 2.8rem">Teste de nível vocal completo · Keila Chrischner — Preparadora Vocal</div>
+<div class="toast" id="toast"></div>
+<script>
+/* ============================================================
+   ÚNICO AJUSTE: seu número de WhatsApp (só dígitos, DDI+DDD)
+   ============================================================ */
+var CONFIG = { whatsapp: "5515998009502" };
+
+/* ---------------- áudio ---------------- */
+var AC = null, AUDIO_OK = !!(window.AudioContext || window.webkitAudioContext);
+function ctx(){
+  if(!AUDIO_OK) return null;
+  try{
+    if(!AC){ AC = new (window.AudioContext || window.webkitAudioContext)(); }
+    if(AC.state === 'suspended'){ AC.resume(); }
+    return AC;
+  }catch(e){ AUDIO_OK = false; return null; }
+}
+var NOTES = {
+  'C3':130.81,'D3':146.83,'E3':164.81,'F3':174.61,'G3':196.00,'A3':220.00,'B3':246.94,
+  'C4':261.63,'D4':293.66,'E4':329.63,'F4':349.23,'G4':392.00,'A4':440.00,'B4':493.88,
+  'C5':523.25,'D5':587.33,'E5':659.25,'F5':698.46,'G5':783.99,'A5':880.00
+};
+function tone(freq, start, dur){
+  var c = ctx(); if(!c) return;
+  var osc = c.createOscillator(), g = c.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  g.gain.setValueAtTime(0, c.currentTime + start);
+  g.gain.linearRampToValueAtTime(0.19, c.currentTime + start + 0.03);
+  g.gain.setValueAtTime(0.19, c.currentTime + start + dur - 0.08);
+  g.gain.linearRampToValueAtTime(0, c.currentTime + start + dur);
+  osc.connect(g); g.connect(c.destination);
+  osc.start(c.currentTime + start);
+  osc.stop(c.currentTime + start + dur + 0.02);
+}
+function playSeq(seq){
+  var c = ctx();
+  if(!c){
+    var al = document.getElementById('audio-label');
+    if(al) al.textContent = 'Áudio indisponível neste navegador — responda pelo que percebe';
+    return;
+  }
+  var total = 0;
+  for(var i=0;i<seq.length;i++){
+    var n = seq[i];
+    tone(NOTES[n[0]], n[1], n[2]);
+    if(n[1] + n[2] > total) total = n[1] + n[2];
+  }
+  var btn = document.getElementById('btn-play');
+  if(btn) btn.classList.add('playing');
+  setTimeout(function(){ if(btn) btn.classList.remove('playing'); }, total*1000 + 120);
+}
+
+/* ============================================================
+   DIMENSÕES E PESOS
+   ============================================================ */
+var DIMS = [
+  {id:1, name:'Percepção auditiva',   short:'Percepção',    weight:22},
+  {id:2, name:'Técnica vocal',        short:'Técnica',      weight:26},
+  {id:3, name:'Conhecimento musical', short:'Conhecimento', weight:14},
+  {id:4, name:'Prática e performance',short:'Prática',      weight:18},
+  {id:5, name:'Rotina e saúde vocal', short:'Rotina',       weight:10},
+  {id:6, name:'Extensão e conforto',  short:'Extensão',     weight:10}
+];
+
+/* ============================================================
+   PERGUNTAS — 24 no total
+   ============================================================ */
+var QUESTIONS = [
+
+  /* ---------- DIM 1 · PERCEPÇÃO (5 áudio, 8 pts cada) ---------- */
+  {dim:1, type:'audio', title:'Qual dos dois sons é mais agudo?', hint:'Ouça os dois e escolha.',
+   seq:[['A4',0,0.7],['A5',1.0,0.7]],
+   options:[{label:'O primeiro som',value:'a',ok:false},{label:'O segundo som',value:'b',ok:true}],
+   good:'Isso: o segundo está uma oitava acima. Você percebeu a diferença de altura.',
+   bad:'Era o segundo — uma oitava acima do primeiro. É essa escuta que treinamos.'},
+
+  {dim:1, type:'audio', title:'Esses dois sons são iguais ou diferentes?', hint:'Ouça com calma antes de responder.',
+   seq:[['A4',0,0.7],['E4',1.0,0.7]],
+   options:[{label:'Iguais',value:'a',ok:false},{label:'Diferentes',value:'b',ok:true}],
+   good:'Exato — o segundo é mais grave, uma quarta abaixo.',
+   bad:'São diferentes: o segundo é mais grave. Diferenciar isso é a base da afinação.'},
+
+  {dim:1, type:'audio', title:'Quantas notas você ouviu?', hint:'Conte as notas da sequência.',
+   seq:[['C4',0,0.5],['D4',0.6,0.5],['E4',1.2,0.5],['F4',1.8,0.7]],
+   options:[{label:'3 notas',value:'a',ok:false},{label:'4 notas',value:'b',ok:true},{label:'5 notas',value:'c',ok:false}],
+   good:'Isso: quatro notas subindo (dó, ré, mi, fá).',
+   bad:'Foram quatro notas subindo na escala. Contar notas é treino de atenção auditiva.'},
+
+  {dim:1, type:'audio', title:'Qual opção repete a nota de referência?', hint:'Ouça a referência e depois as duas opções. Qual tem a MESMA altura?',
+   seq:[['A4',0,0.7],['E4',1.2,0.7],['A4',2.4,0.9]],
+   options:[{label:'A primeira opção',value:'a',ok:false},{label:'A segunda opção',value:'b',ok:true}],
+   good:'Perfeito — a segunda repete a referência. Isso é memória tonal, a base de cantar afinado.',
+   bad:'Era a segunda: ela repete a referência. A primeira era mais grave. Memória tonal se treina.'},
+
+  {dim:1, type:'audio', title:'Ouça o acorde: ele soa maior ou menor?', hint:'As três notas soam juntas, de uma vez.',
+   seq:[['C4',0,1.0],['E4',0,1.0],['G4',0,1.0]],
+   options:[{label:'Maior (mais aberto, alegre)',value:'a',ok:true},{label:'Menor (mais fechado, melancólico)',value:'b',ok:false}],
+   good:'Correto — é um acorde maior: dó, mi, sol.',
+   bad:'É um acorde maior: dó, mi, sol. Identificar maior e menor é o que sustenta a divisão vocal.'},
+
+  /* ---------- DIM 2 · TÉCNICA (4 pontuadas + 1 diagnóstica) ---------- */
+  {dim:2, type:'exp', title:'Como está sua afinação hoje?', hint:'Pense nas últimas vezes em que você cantou.',
+   options:[
+     {label:'Saio do tom com frequência',value:'a',pts:0},
+     {label:'Escorrego em alguns trechos',value:'b',pts:3},
+     {label:'Mantenho na maior parte do tempo',value:'c',pts:6},
+     {label:'Mantenho com segurança quase sempre',value:'d',pts:8}
+   ]},
+
+  {dim:2, type:'exp', title:'E o seu apoio respiratório?', hint:'Aquele ar que precisa durar a frase inteira.',
+   options:[
+     {label:'O ar acaba no meio da frase',value:'a',pts:0},
+     {label:'Aguento frases curtas',value:'b',pts:3},
+     {label:'Controlo bem a maior parte das frases',value:'c',pts:6},
+     {label:'Controlo e uso a respiração a meu favor',value:'d',pts:8}
+   ]},
+
+  {dim:2, type:'exp', title:'Como está o seu registro agudo?', hint:'As notas mais altas que você costuma cantar.',
+   options:[
+     {label:'Travo ou falho no agudo',value:'a',pts:0},
+     {label:'Consigo apertando muito',value:'b',pts:2},
+     {label:'Consigo, mas com esforço',value:'c',pts:4},
+     {label:'Consigo com conforto e controle',value:'d',pts:6}
+   ]},
+
+  {dim:2, type:'exp', title:'Você sustenta segunda voz ou divisão vocal?', hint:'Quando várias vozes cantam juntas.',
+   options:[
+     {label:'Ainda não consigo',value:'a',pts:0},
+     {label:'Tento, mas me perco',value:'b',pts:2},
+     {label:'Consigo nas músicas mais simples',value:'c',pts:4},
+     {label:'Consigo com segurança',value:'d',pts:6}
+   ]},
+
+  {dim:2, type:'exp', ptsNone:true, title:'O que você quer resolver primeiro?', hint:'Escolha o ponto que mais te incomoda hoje. Isso não pontua — direciona o plano.',
+   options:[
+     {label:'Afinação',value:'afinacao',pts:0},
+     {label:'Agudos',value:'agudos',pts:0},
+     {label:'Respiração e apoio',value:'respiracao',pts:0},
+     {label:'Divisão vocal / segunda voz',value:'divisao',pts:0},
+     {label:'Timbre e potência',value:'timbre',pts:0},
+     {label:'Interpretação e presença',value:'interpretacao',pts:0}
+   ]},
+
+  /* ---------- DIM 3 · CONHECIMENTO MUSICAL (5 × 5) ---------- */
+  {dim:3, type:'exp', title:'O que significa o "tom" de uma música?', hint:'Quando alguém diz "essa música está em outro tom".',
+   options:[
+     {label:'A velocidade da música',value:'a',pts:0},
+     {label:'A altura em que ela é cantada',value:'b',pts:5},
+     {label:'O volume do som',value:'c',pts:0},
+     {label:'O estilo da música',value:'d',pts:0}
+   ],
+   explain:'É a altura em que a música é cantada. Mudar de tom é subir ou descer a música inteira.'},
+
+  {dim:3, type:'exp', title:'O que é um intervalo musical?', hint:'',
+   options:[
+     {label:'A pausa entre duas frases',value:'a',pts:0},
+     {label:'A distância entre duas notas',value:'b',pts:5},
+     {label:'O tempo que uma nota dura',value:'c',pts:0},
+     {label:'A quantidade de vozes de um coral',value:'d',pts:0}
+   ],
+   explain:'É a distância entre duas notas. Todo o trabalho de afinação e de segunda voz se apoia nisso.'},
+
+  {dim:3, type:'exp', title:'O que é uma oitava?', hint:'',
+   options:[
+     {label:'Oito notas diferentes',value:'a',pts:0},
+     {label:'Um acorde com oito notas',value:'b',pts:0},
+     {label:'A distância entre uma nota e a mesma nota mais aguda ou mais grave',value:'c',pts:5},
+     {label:'Oito compassos de uma música',value:'d',pts:0}
+   ],
+   explain:'É a mesma nota, uma "volta" acima ou abaixo. É o intervalo mais estável para o ouvido humano.'},
+
+  {dim:3, type:'exp', title:'O que é harmonia?', hint:'',
+   options:[
+     {label:'Duas ou mais notas soando juntas',value:'a',pts:5},
+     {label:'Cantar mais forte que os outros',value:'b',pts:0},
+     {label:'A letra da música',value:'c',pts:0},
+     {label:'O ritmo da bateria',value:'d',pts:0}
+   ],
+   explain:'É o que acontece quando duas ou mais notas soam juntas. Divisão vocal é harmonia aplicada.'},
+
+  {dim:3, type:'exp', title:'Se uma música "sobe um tom", o que acontece?', hint:'',
+   options:[
+     {label:'Ela fica mais rápida',value:'a',pts:0},
+     {label:'Ela fica mais aguda',value:'b',pts:5},
+     {label:'Ela fica mais grave',value:'c',pts:0},
+     {label:'Ela fica mais lenta',value:'d',pts:0}
+   ],
+   explain:'Sobe em altura: tudo é cantado mais agudo. Por isso às vezes um tom novo "cai melhor" na voz.'},
+
+  /* ---------- DIM 4 · PRÁTICA E PERFORMANCE (5 × 6) ---------- */
+  {dim:4, type:'exp', title:'Com que frequência você canta?', hint:'Contando ensaio, igreja, aula, casa.',
+   options:[
+     {label:'Quase nunca',value:'a',pts:0},
+     {label:'De vez em quando',value:'b',pts:2},
+     {label:'Algumas vezes por semana',value:'c',pts:4},
+     {label:'Quase todos os dias',value:'d',pts:6}
+   ]},
+
+  {dim:4, type:'exp', title:'Você já cantou em público?', hint:'Igreja, palco, evento, casamento, qualquer plateia.',
+   options:[
+     {label:'Nunca cantei em público',value:'a',pts:0},
+     {label:'Já cantei poucas vezes',value:'b',pts:2},
+     {label:'Canto com alguma frequência',value:'c',pts:4},
+     {label:'Canto com regularidade e me sinto seguro',value:'d',pts:6}
+   ]},
+
+  {dim:4, type:'exp', title:'Você grava sua voz para estudar?', hint:'Ouvir a própria gravação é a forma mais rápida de evoluir.',
+   options:[
+     {label:'Nunca gravo',value:'a',pts:0},
+     {label:'Gravo às vezes, mas não ouço',value:'b',pts:2},
+     {label:'Gravo e ouço para perceber erros',value:'c',pts:4},
+     {label:'Gravo, ouço e comparo com gravações antigas',value:'d',pts:6}
+   ]},
+
+  {dim:4, type:'exp', title:'Você tem repertório definido e ensaia com regularidade?', hint:'Músicas que você domina e treina de propósito.',
+   options:[
+     {label:'Não tenho repertório',value:'a',pts:0},
+     {label:'Canto o que aparece na hora',value:'b',pts:2},
+     {label:'Tenho algumas músicas que domínio',value:'c',pts:4},
+     {label:'Tenho repertório e ensaio com rotina',value:'d',pts:6}
+   ]},
+
+  {dim:4, type:'exp', title:'Você toca algum instrumento?', hint:'Ajuda muito na percepção de tom e harmonia.',
+   options:[
+     {label:'Não toco nada',value:'a',pts:0},
+     {label:'Arranho um pouco',value:'b',pts:2},
+     {label:'Toco violão, teclado ou piano',value:'c',pts:4},
+     {label:'Toco bem e uso para estudar voz',value:'d',pts:6}
+   ]},
+
+  /* ---------- DIM 5 · ROTINA E SAÚDE VOCAL (4 × 6) ---------- */
+  {dim:5, type:'exp', title:'Você aquece a voz antes de cantar?', hint:'Exercícios, vocalize, aquecimento mesmo.',
+   options:[
+     {label:'Nunca aqueço',value:'a',pts:0},
+     {label:'Às vezes, quando lembro',value:'b',pts:2},
+     {label:'Quase sempre',value:'c',pts:4},
+     {label:'Sempre, com rotina definida',value:'d',pts:6}
+   ]},
+
+  {dim:5, type:'exp', title:'Como está sua hidratação ao longo do dia?', hint:'Água é o que mantém as pregas vocais lubrificadas.',
+   options:[
+     {label:'Bebo pouca água',value:'a',pts:0},
+     {label:'Bebo quando sinto sede',value:'b',pts:2},
+     {label:'Bebo água ao longo do dia',value:'c',pts:4},
+     {label:'Bebo água regularmente e evito o que resseca a voz',value:'d',pts:6}
+   ]},
+
+  {dim:5, type:'exp', title:'Você já sentiu dor, rouquidão ou cansaço na voz?', hint:'Depois de cantar ou falar muito.',
+   options:[
+     {label:'Nunca',value:'a',pts:6},
+     {label:'Raramente',value:'b',pts:4},
+     {label:'Algumas vezes',value:'c',pts:2},
+     {label:'Com frequência',value:'d',pts:0}
+   ],
+   explain:'Sinal de que a voz está sendo usada com esforço. Vale atenção antes de aumentar a carga.'},
+
+  {dim:5, type:'exp', title:'E o descanso? Você dá repouso à voz?', hint:'Dormir bem e não forçar a voz em dias seguidos.',
+   options:[
+     {label:'Não descanso e durmo mal',value:'a',pts:0},
+     {label:'Durmo bem, mas nunca penso na voz',value:'b',pts:2},
+     {label:'Durmo bem e evito forçar a voz',value:'c',pts:4},
+     {label:'Tenho rotina de sono e repouso vocal',value:'d',pts:6}
+   ]}
+];
+
+/* ---------------- extensão ---------------- */
+var LOW_OPTS  = ['C3','E3','G3','A3','C4','E4','G4'];
+var HIGH_OPTS = ['C4','E4','G4','A4','C5','E5','G5','A5'];
+var AGUDO_OPTS = [
+  {label:'Tranquilo, canto sem esforço',pts:10},
+  {label:'Aperta um pouco, mas consigo',pts:6},
+  {label:'Aperta muito — travo ou falho',pts:2}
+];
+
+/* ---------------- estado ---------------- */
+var idx = 0, answers = {}, rangeLow = null, rangeHigh = null, agudoPts = null;
+var currentQ = null, nomeAluno = '', ultimoResumo = '', plays = 0;
+
+function $(id){ return document.getElementById(id); }
+function show(id){
+  var s = document.querySelectorAll('.screen');
+  for(var i=0;i<s.length;i++) s[i].classList.remove('active');
+  $(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toast(msg){
+  var t = $('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3200);
+}
+function partOf(dim){
+  var map = {1:'Parte 1 · Percepção',2:'Parte 2 · Técnica',3:'Parte 3 · Conhecimento',4:'Parte 4 · Prática',5:'Parte 5 · Rotina e saúde'};
+  return map[dim] || 'Parte 1 · Percepção';
+}
+
+/* ---------------- render ---------------- */
+function renderQ(){
+  currentQ = QUESTIONS[idx];
+  $('q-part').textContent  = partOf(currentQ.dim);
+  $('q-count').textContent = (idx+1) + ' de ' + QUESTIONS.length;
+  $('q-bar').style.width   = Math.round((idx / QUESTIONS.length) * 92 + 3) + '%';
+  $('q-title').textContent = currentQ.title;
+  $('q-hint').textContent  = currentQ.hint || '';
+
+  var fb = $('q-feedback'); fb.className = 'feedback'; fb.innerHTML = '';
+
+  var next = $('btn-next');
+  next.disabled = !answers.hasOwnProperty(idx);
+  next.textContent = (idx === QUESTIONS.length - 1) ? 'Ir para a extensão →' : 'Avançar →';
+  $('btn-back').style.visibility = idx === 0 ? 'hidden' : 'visible';
+
+  if(currentQ.type === 'audio'){
+    $('q-audio').style.display = 'block';
+    plays = 0;
+    $('audio-label').textContent = 'Clique para ouvir';
+    $('audio-count').textContent = 'Pode ouvir quantas vezes quiser';
+    $('btn-play').textContent = '▶';
+  } else {
+    $('q-audio').style.display = 'none';
+  }
+
+  var box = $('q-options'); box.innerHTML = '';
+  var keys = ['A','B','C','D','E','F'];
+  for(var i=0;i<currentQ.options.length;i++){
+    (function(op, i){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt';
+      b.innerHTML = '<span>' + op.label + '</span><span class="k">' + keys[i] + '</span>';
+      b.addEventListener('click', function(){ pick(op, b); });
+      box.appendChild(b);
+    })(currentQ.options[i], i);
+  }
+
+  /* restaura resposta já dada (ao voltar) */
+  if(answers.hasOwnProperty(idx)) restoreAnswer();
+}
+
+function restoreAnswer(){
+  var a = answers[idx];
+  var opts = $('q-options').querySelectorAll('.opt');
+  if(currentQ.type === 'audio'){
+    for(var i=0;i<opts.length;i++) opts[i].disabled = true;
+    if(a.ok){ opts.find ? null : null; }
+    var btnIdx = -1;
+    for(var j=0;j<currentQ.options.length;j++){
+      if(currentQ.options[j].ok) btnIdx = j;
+    }
+    if(a.ok){ opts[a.idx].classList.add('correct'); }
+    else {
+      opts[a.idx].classList.add('wrong');
+      if(btnIdx >= 0) opts[btnIdx].classList.add('correct');
+    }
+    var fb = $('q-feedback');
+    fb.className = 'feedback ' + (a.ok ? 'good' : 'bad') + ' show';
+    fb.innerHTML = (a.ok ? '✅ ' + currentQ.good : '❌ ' + currentQ.bad);
+  } else {
+    if(opts[a.idx]) opts[a.idx].classList.add('sel');
+    if(a.showExplain && currentQ.explain){
+      var f2 = $('q-feedback');
+      f2.className = 'feedback ' + (a.pts > 0 ? 'good' : 'bad') + ' show';
+      f2.innerHTML = (a.pts > 0 ? '✅ ' : '💡 ') + currentQ.explain;
+    }
+  }
+}
+
+function pick(op, btn){
+  var opts = $('q-options').querySelectorAll('.opt');
+  var optIdx = Array.prototype.indexOf.call(opts, btn);
+
+  if(currentQ.type === 'audio'){
+    var ok = !!op.ok;
+    for(var i=0;i<opts.length;i++) opts[i].disabled = true;
+    btn.classList.add(ok ? 'correct' : 'wrong');
+    if(!ok){
+      for(var j=0;j<currentQ.options.length;j++){
+        if(currentQ.options[j].ok) opts[j].classList.add('correct');
+      }
+    }
+    var fb = $('q-feedback');
+    fb.className = 'feedback ' + (ok ? 'good' : 'bad') + ' show';
+    fb.innerHTML = (ok ? '✅ ' : '❌ ') + (ok ? currentQ.good : currentQ.bad);
+    answers[idx] = {idx:optIdx, ok:ok};
+
+  } else {
+    for(var k=0;k<opts.length;k++) opts[k].classList.remove('sel');
+    btn.classList.add('sel');
+    answers[idx] = {idx:optIdx, pts:op.pts||0, val:op.value, dim:currentQ.dim};
+
+    /* conhecimento mostra explicação */
+    if(currentQ.dim === 3 && currentQ.explain){
+      answers[idx].showExplain = true;
+      var f2 = $('q-feedback');
+      f2.className = 'feedback ' + ((op.pts||0) > 0 ? 'good' : 'bad') + ' show';
+      f2.innerHTML = ((op.pts||0) > 0 ? '✅ ' : '💡 ') + currentQ.explain;
+    }
+  }
+  $('btn-next').disabled = false;
+}
+
+function nextQ(){
+  if(!answers.hasOwnProperty(idx)) return;
+  if(idx < QUESTIONS.length - 1){ idx++; renderQ(); }
+  else { buildRange(); show('scr-range'); }
+}
+function prevQ(){
+  if(idx > 0){ idx--; renderQ(); }
+}
+
+/* ---------------- extensão ---------------- */
+function buildRange(){
+  var cl = $('chips-low'), ch = $('chips-high');
+  cl.innerHTML = ''; ch.innerHTML = '';
+
+  function makeChip(n, box, onPick){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip';
+    b.innerHTML = n + ' <span class="spk">🔊</span>';
+    b.addEventListener('click', function(){
+      var s = box.querySelectorAll('.chip');
+      for(var i=0;i<s.length;i++) s[i].classList.remove('on');
+      b.classList.add('on'); onPick(n); checkRange();
+    });
+    b.querySelector('.spk').addEventListener('click', function(ev){
+      ev.stopPropagation(); playSeq([[n,0,0.9]]);
+    });
+    box.appendChild(b);
+  }
+  for(var i=0;i<LOW_OPTS.length;i++)  makeChip(LOW_OPTS[i],  cl, function(n){ rangeLow = n; });
+  for(var j=0;j<HIGH_OPTS.length;j++) makeChip(HIGH_OPTS[j], ch, function(n){ rangeHigh = n; });
+
+  var ab = $('agudo-options'); ab.innerHTML = '';
+  for(var k=0;k<AGUDO_OPTS.length;k++){
+    (function(op){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.textContent = op.label;
+      b.addEventListener('click', function(){
+        var s = ab.querySelectorAll('.opt');
+        for(var i=0;i<s.length;i++) s[i].classList.remove('sel');
+        b.classList.add('sel'); agudoPts = op.pts; checkRange();
+      });
+      ab.appendChild(b);
+    })(AGUDO_OPTS[k]);
+  }
+}
+function checkRange(){ $('btn-finish').disabled = !(rangeLow && rangeHigh && agudoPts !== null); }
+
+/* ============================================================
+   PONTUAÇÃO
+   ============================================================ */
+function calc(){
+  /* máximo bruto por dimensão */
+  var maxRaw = {};
+  for(var d=1;d<=5;d++) maxRaw[d] = 0;
+
+  QUESTIONS.forEach(function(q, i){
+    if(q.dim >= 1 && q.dim <= 5){
+      var mx = 0;
+      q.options.forEach(function(o){
+        var p = (q.type === 'audio') ? 8 : (o.pts || 0);
+        if(p > mx) mx = p;
+      });
+      if(!q.ptsNone) maxRaw[q.dim] += mx;
+    }
+  });
+
+  /* máximo da dimensão 6: largura (20) + agudo (10) */
+  maxRaw[6] = 30;
+
+  /* bruto obtido */
+  var raw = {1:0,2:0,3:0,4:0,5:0,6:0};
+  QUESTIONS.forEach(function(q, i){
+    var a = answers[i];
+    if(!a) return;
+    if(q.type === 'audio'){ raw[q.dim] += a.ok ? 8 : 0; }
+    else { raw[q.dim] += (a.pts || 0); }
+  });
+
+  /* extensão */
+  var SEMI = {'C':0,'D':2,'E':4,'F':5,'G':7,'A':9,'B':11};
+  function nn(n){ return SEMI[n.charAt(0)] + (parseInt(n.charAt(1),10) + 1) * 12; }
+  var lo = nn(rangeLow), hi = nn(rangeHigh), width = Math.max(0, hi - lo);
+  var widthPts = width < 10 ? 3 : width < 14 ? 7 : width < 18 ? 11 : width < 24 ? 15 : width < 30 ? 18 : 20;
+  raw[6] = widthPts + agudoPts;
+
+  /* pontos ponderados */
+  var pts = {}, pct = {}, total = 0;
+  for(var d=1;d<=6;d++){
+    var w = DIMS[d-1].weight;
+    var ratio = maxRaw[d] > 0 ? Math.min(1, raw[d] / maxRaw[d]) : 0;
+    pts[d] = Math.round(ratio * w);
+    pct[d] = Math.round(ratio * 100);
+    total += pts[d];
+  }
+  if(total > 100) total = 100;
+
+  return {raw:raw, maxRaw:maxRaw, pts:pts, pct:pct, total:total,
+          lo:lo, hi:hi, width:width, widthPts:widthPts};
+}
+
+function levelOf(t){ return t < 35 ? 'n1' : t < 60 ? 'n2' : t < 80 ? 'n3' : 'n4'; }
+</script>
+<script>
+/* ============================================================
+   TEXTOS POR NÍVEL
+   ============================================================ */
+var NIVEIS = {
+  n1: {
+    badge:'Nível 1 · Fundamentos',
+    title:'Construindo a base',
+    sub:'Seu mapa mostra uma voz em formação: o ouvido, a técnica e a rotina ainda estão sendo construídos. É a fase em que a evolução acontece mais rápido — desde que o trabalho seja direcionado.',
+    strong:[
+      ['💛','Você está aqui: começou. Esse é o passo que a maioria nunca dá.'],
+      ['📋','Agora existe um mapa: sabemos exatamente por onde começar.'],
+      ['📈','Com rotina simples e direção, a diferença aparece em poucas semanas.']
+    ],
+    weak:[
+      ['🎯','A base técnica (apoio, afinação, controle do ar) ainda funciona por instinto.'],
+      ['👂','A escuta precisa de treino: diferenciar alturas ainda exige esforço.'],
+      ['🔁','A rotina é irregular — sem constância, cada aula vira recomeço.']
+    ],
+    focoTitle:'Base: apoio, afinação e rotina',
+    focoText:'Neste ciclo reduzimos repertório e aumentamos precisão. Não vamos cantar mais difícil: vamos cantar certo, todos os dias, por pouco tempo — porque constância vale mais que intensidade.',
+    exercicios:[
+      ['1','Vocalize de cinco notas (dó-ré-mi-fá-sol) subindo e descendo, devagar, com o mesmo volume do começo ao fim. 5 minutos por dia.'],
+      ['2','Respiração com contagem: inspire em 4 tempos, solte em 8, ombros parados. 10 repetições antes de cantar.'],
+      ['3','Cante uma música conhecida só na vogal "ô", sem letra, ouvindo se sai do tom. Grave e escute depois.'],
+      ['4','Antes de qualquer canto, 3 minutos de aquecimento: vibração de lábios (brrr) em cinco notas.']
+    ]
+  },
+  n2: {
+    badge:'Nível 2 · Desenvolvimento',
+    title:'Você canta — agora com controle',
+    sub:'Você já tem ouvido e alguma técnica. O salto deste ciclo é transformar o que às vezes funciona em algo que sempre funciona. Consistência é a palavra.',
+    strong:[
+      ['🎵','Você reconhece altura e diferença entre notas: o ouvido responde.'],
+      ['📚','Tem experiência de canto — seu ouvido já foi treinado pelo repertório.'],
+      ['💪','Sustenta uma música inteira; agora precisa de constância.']
+    ],
+    weak:[
+      ['⚙️','O que sai bem hoje pode falhar amanhã: falta consistência técnica.'],
+      ['🏔️','O agudo ainda cobra esforço, quando deveria cobrar técnica.'],
+      ['🎼','A segunda voz ainda depende de sorte, não de percepção.']
+    ],
+    focoTitle:'Consistência e registro agudo',
+    focoText:'Vamos estabilizar o que já funciona e abrir o agudo com técnica — não com força. Aqui a respiração deixa de ser instinto e passa a ser ferramenta.',
+    exercicios:[
+      ['1','Escala de cinco notas com "ng" (como em "sing"), ligando grave e agudo sem quebrar o som. 5 minutos.'],
+      ['2','Sustain: escolha uma nota confortável e sustente 12 tempos sem tremer, controlando o ar.'],
+      ['3','Cante a mesma música em dois tons diferentes. Se em um deles trava, é técnico — e é ali que vamos mexer.'],
+      ['4','Aquecimento + 1 minuto de vibração de lábios antes de cada ensaio, sem exceção.']
+    ]
+  },
+  n3: {
+    badge:'Nível 3 · Consolidação',
+    title:'Técnica firme, faltando acabamento',
+    sub:'Seu ouvido responde e sua técnica sustenta. Agora o jogo é detalhe — e detalhe é exatamente o que um ouvido externo percebe antes de você.',
+    strong:[
+      ['👂','Percepção musical consistente: você identifica o que ouve.'],
+      ['🎤','Você tem repertório e quilometragem cantando.'],
+      ['🎯','Sua extensão já cobre boa parte do que você quer cantar.']
+    ],
+    weak:[
+      ['🔍','Faltam detalhes que só um ouvido externo aponta.'],
+      ['⚡','A resistência cai em músicas longas ou em agudos mais altos.'],
+      ['🎚️','Ainda há diferença de qualidade entre grave e agudo.']
+    ],
+    focoTitle:'Uniformidade e divisão vocal',
+    focoText:'Este é o ciclo de lapidar: uniformizar registros, ganhar resistência e destravar a divisão vocal com percepção harmônica — não mais por tentativa.',
+    exercicios:[
+      ['1','Arpejo de oitava em "á" e depois em "ú", buscando o mesmo brilho no grave e no agudo. 3 minutos.'],
+      ['2','Cante a melodia e depois a terça acima. Comece por uma música lenta do seu repertório.'],
+      ['3','Grave a segunda voz de um trecho e cante a primeira por cima da gravação. Se mantiver, sua percepção está firme.'],
+      ['4','Escolha uma música longa e cante inteira sem parar, observando onde a resistência cai.']
+    ]
+  },
+  n4: {
+    badge:'Nível 4 · Refinamento',
+    title:'Sua voz é instrumento — agora é assinatura',
+    sub:'Você tem ouvido treinado, técnica consolidada e extensão confortável. O próximo salto não é aprender a cantar: é cantar com identidade.',
+    strong:[
+      ['🏆','Percepção musical de alto nível: você ouve e reproduz com precisão.'],
+      ['🎼','Extensão ampla e controle de agudo acima da média.'],
+      ['🎤','Experiência real — você sustenta sua voz em grupo ou sozinho.']
+    ],
+    weak:[
+      ['✨','Falta assinatura: sua voz pode soar "correta" em vez de inconfundível.'],
+      ['🧠','A parte artística (interpretação, intenção) ainda não acompanha a técnica.'],
+      ['📊','O básico já foi resolvido — você precisa de diagnóstico fino, não de exercício genérico.']
+    ],
+    focoTitle:'Interpretação, timbre e identidade',
+    focoText:'Aqui não se trata mais de vencer dificuldade técnica: trata-se de escolha artística. Vamos trabalhar cor, intenção e o que a sua voz diz antes da letra.',
+    exercicios:[
+      ['1','Cante a mesma frase com três intenções (oração, alegria, urgência). Observe o que muda no corpo e no timbre.'],
+      ['2','Escolha uma música que domina e retire 30% da força. Onde o som continua bonito, está sua voz de verdade.'],
+      ['3','Grave uma take e escute só a interpretação, sem julgar afinação. Anote uma coisa para mudar na próxima.'],
+      ['4','Ensine um exercício a alguém. Ensinar revela o que você ainda não domina.']
+    ]
+  }
+};
+
+/* leitura por dimensão */
+var DIM_TXT = {
+  ausente: {
+    1:'A escuta ainda não está treinada. Isso não é "falta de dom": percepção se treina com exercícios curtos e diários.',
+    2:'A técnica está em formação. Ainda há esforço onde deveria haver controle.',
+    3:'Pouco contato com a teoria musical. Dá para resolver rápido com aulas práticas aplicadas ao repertório.',
+    4:'A prática é esporádica. Sem rotina, a evolução não se sustenta.',
+    5:'A voz ainda não tem rotina de cuidado. Aqui há ganho rápido: hidratação e aquecimento mudam o som.',
+    6:'A extensão confortável ainda é estreita — consequência natural da técnica em construção.'
+  },
+  medio: {
+    1:'Você percebe bem o básico, mas os intervalos mais finos ainda pedem atenção.',
+    2:'Você tem controle em parte do repertório; falta estabilidade no que é difícil.',
+    3:'Você entende os conceitos principais e pode aprofundar na prática.',
+    4:'Você canta com alguma regularidade; falta sistematizar ensaio e repertório.',
+    5:'Você cuida da voz, mas não de forma consistente.',
+    6:'Extensão média — espaço claro para crescer com técnica.'
+  },
+  forte: {
+    1:'Percepção auditiva muito boa: você ouve e identifica com precisão.',
+    2:'Técnica consolidada: seu controle sustenta o repertório.',
+    3:'Conhecimento musical sólido — base para harmonia e divisão vocal.',
+    4:'Prática consistente: você tem rotina, repertório e experiência de palco.',
+    5:'Rotina de cuidado vocal estabelecida. A voz é tratada como instrumento.',
+    6:'Extensão ampla e confortável.'
+  }
+};
+
+/* ============================================================
+   RESULTADO
+   ============================================================ */
+function renderResult(){
+  var r = calc();
+  var lvl = levelOf(r.total);
+  var d = NIVEIS[lvl];
+
+  $('r-badge').textContent = d.badge;
+  $('r-title').textContent = d.title;
+  $('r-sub').textContent   = d.sub;
+
+  var deg = Math.round(r.total * 3.6);
+  var col = r.total < 35 ? '#c9962e' : (r.total < 60 ? '#8a6719' : (r.total < 80 ? '#6b4a86' : '#2f7d5d'));
+  $('r-dial').style.background = 'conic-gradient(' + col + ' ' + deg + 'deg, #efe7d9 ' + deg + 'deg)';
+  $('r-score').textContent = r.total;
+
+  drawRadar(r.pct);
+  drawDimBars(r);
+
+  /* extensão */
+  var mid = ((r.lo + r.hi) / 2);
+  var regiao = mid < 59 ? 'grave' : (mid < 64.5 ? 'médio-grave' : (mid < 69 ? 'médio-agudo' : 'agudo'));
+  var faixa = r.width >= 24 ? 'ampla' : (r.width >= 18 ? 'média' : (r.width >= 12 ? 'curta' : 'ainda curta'));
+  $('r-ext').innerHTML = 'Você canta com conforto de <strong>' + rangeLow + '</strong> a <strong>' + rangeHigh +
+    '</strong> — <strong>' + r.width + ' semitons</strong> de extensão ' + faixa +
+    ', predominância <strong>' + regiao + '</strong>.' +
+    '<span class="ext-sub">Essa é sua extensão de conforto hoje, não o seu limite. Extensão é consequência de técnica: conforme apoio e registro se firmam, a faixa utilizável aumenta.</span>';
+
+  /* conquistas / atenção */
+  var st = $('r-strong'); st.innerHTML = '';
+  d.strong.forEach(function(s){
+    var li = document.createElement('li');
+    li.innerHTML = '<span class="ico">' + s[0] + '</span><span>' + s[1] + '</span>';
+    st.appendChild(li);
+  });
+  /* conquistas reais medidas */
+  DIMS.forEach(function(dm){
+    if(r.pct[dm.id] >= 80){
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="ico">✔️</span><span><strong>' + dm.name + '</strong> está no seu ponto forte (' + r.pct[dm.id] + '%).</span>';
+      st.appendChild(li);
+    }
+  });
+
+  var wk = $('r-weak'); wk.innerHTML = '';
+  d.weak.forEach(function(w){
+    var li = document.createElement('li');
+    li.innerHTML = '<span class="ico">' + w[0] + '</span><span>' + w[1] + '</span>';
+    wk.appendChild(li);
+  });
+  /* pontos de atenção reais */
+  var piores = DIMS.slice().sort(function(a,b){ return r.pct[a.id] - r.pct[b.id]; }).slice(0,2);
+  piores.forEach(function(dm){
+    if(r.pct[dm.id] < 60){
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="ico">⚠️</span><span><strong>' + dm.name + '</strong> ficou em ' + r.pct[dm.id] + '% — é onde o próximo ciclo rende mais.</span>';
+      wk.appendChild(li);
+    }
+  });
+  /* o que ele disse querer resolver */
+  var alvo = null;
+  for(var i=0;i<QUESTIONS.length;i++){ if(QUESTIONS[i].ptsNone && answers[i]) alvo = answers[i]; }
+  if(alvo){
+    var labels = {'afinacao':'afinação','agudos':'agudos','respiracao':'respiração e apoio','divisao':'divisão vocal','timbre':'timbre e potência','interpretacao':'interpretação e presença'};
+    var li2 = document.createElement('li');
+    li2.innerHTML = '<span class="ico">💬</span><span>Você apontou <strong>' + labels[alvo.val] + '</strong> como prioridade. O plano abaixo começa por aí.</span>';
+    wk.appendChild(li2);
+  }
+
+  /* leitura por dimensão */
+  var det = $('r-detalhe'); det.innerHTML = '';
+  DIMS.forEach(function(dm){
+    var p = r.pct[dm.id];
+    var faixaTxt = p >= 80 ? 'forte' : (p >= 50 ? 'ok' : 'fraco');
+    var faixaLabel = p >= 80 ? 'Forte' : (p >= 50 ? 'Em desenvolvimento' : 'Atenção');
+    var txt = p >= 80 ? DIM_TXT.forte[dm.id] : (p >= 50 ? DIM_TXT.medio[dm.id] : DIM_TXT.ausente[dm.id]);
+    var div = document.createElement('div');
+    div.className = 'det-item';
+    div.innerHTML = '<div class="det-head"><b>' + dm.name + '</b><span class="lvl ' + faixaTxt + '">' + faixaLabel + ' · ' + p + '%</span></div><p>' + txt + '</p>';
+    det.appendChild(div);
+  });
+
+  /* foco */
+  $('r-foco-title').textContent = d.focoTitle;
+  $('r-foco-text').textContent  = d.focoText;
+
+  /* alerta: dimensão crítica que o nível "esconde" */
+  var piorDim = DIMS.slice().sort(function(a,b){ return r.pct[a.id] - r.pct[b.id]; })[0];
+  var alerta = $('r-alerta');
+  if(r.pct[piorDim.id] < 40 && lvl === 'n4' || r.pct[piorDim.id] < 30 && lvl !== 'n1'){
+    var conselho = {
+      1:'Treine o ouvido em paralelo: 5 minutos de intervalos por dia mudam sua afinação em semanas.',
+      2:'A técnica é o gargalo: sem apoio e controle, o resto não avança.',
+      3:'Vale estudar teoria aplicada — tom, intervalo e harmonia destravam a divisão vocal.',
+      4:'Sem prática regular, o resto não se sustenta. Repertório e ensaio precisam entrar na rotina.',
+      5:'Cuidar da voz é parte do treino: hidratação, aquecimento e repouso.',
+      6:'A extensão ainda limita o repertório — trabalhe registro médio antes de buscar agudos.'
+    }[piorDim.id];
+    alerta.style.display = 'block';
+    $('r-alerta-txt').innerHTML = '<strong>⚠️ Atenção antes de avançar:</strong> sua dimensão mais fraca é <strong>' + piorDim.name + ' (' + r.pct[piorDim.id] + '%)</strong>. Mesmo com o restante forte, ela vai limitar seu resultado. ' + conselho;
+  } else {
+    alerta.style.display = 'none';
+  }
+
+  var ex = $('r-exercicios'); ex.innerHTML = '';
+  d.exercicios.forEach(function(e){
+    var li = document.createElement('li');
+    li.innerHTML = '<span class="ico">' + e[0] + '.</span><span>' + e[1] + '</span>';
+    ex.appendChild(li);
+  });
+
+  /* resumo texto */
+  var linhas = ['🎤 TESTE DE NÍVEL VOCAL COMPLETO — Keila Chrischner'];
+  if(nomeAluno) linhas.push('Aluno(a): ' + nomeAluno);
+  linhas.push('');
+  linhas.push('📊 Resultado geral: ' + r.total + '/100 — ' + d.badge);
+  linhas.push('');
+  linhas.push('Perfil por dimensão:');
+  DIMS.forEach(function(dm){
+    linhas.push('• ' + dm.name + ': ' + r.pct[dm.id] + '% (' + r.pts[dm.id] + '/' + dm.weight + ')');
+  });
+  linhas.push('');
+  linhas.push('🎼 Extensão: ' + rangeLow + ' a ' + rangeHigh + ' (' + r.width + ' semitons)');
+  linhas.push('➡️ Foco do próximo ciclo: ' + d.focoTitle);
+  var pior = DIMS.slice().sort(function(a,b){ return r.pct[a.id] - r.pct[b.id]; })[0];
+  linhas.push('⚠️ Dimensão mais frágil: ' + pior.name + ' (' + r.pct[pior.id] + '%)');
+  ultimoResumo = linhas.join('\n');
+
+  show('scr-result');
+}
+
+/* ---------- barras por dimensão ---------- */
+function drawDimBars(r){
+  var box = $('r-dimbars'); box.innerHTML = '';
+  var cores = ['#c9962e','#6b4a86','#2f7d5d','#8a6719','#a3557d','#3f6f8a'];
+  DIMS.forEach(function(dm, i){
+    var p = r.pct[dm.id];
+    var div = document.createElement('div');
+    div.className = 'bar-row';
+    div.innerHTML = '<div class="bar-top"><b>' + dm.short + '</b><span>' + p + '% · ' + r.pts[dm.id] + '/' + dm.weight + '</span></div>' +
+      '<div class="track"><i style="width:' + p + '%;background:' + cores[i] + '"></i></div>';
+    box.appendChild(div);
+  });
+}
+
+/* ---------- radar SVG ---------- */
+function drawRadar(pct){
+  var n = DIMS.length, R = 96, cx = 120, cy = 112, W = 240, H = 224;
+  var ang = [];
+  for(var i=0;i<n;i++) ang.push((-90 + i*(360/n)) * Math.PI/180);
+
+  function pt(i, r){ return [cx + Math.cos(ang[i])*r, cy + Math.sin(ang[i])*r]; }
+
+  var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="Perfil vocal nas seis dimensões">';
+
+  /* anéis */
+  [0.25,0.5,0.75,1].forEach(function(f){
+    var p = [];
+    for(var i=0;i<n;i++){ var q = pt(i, R*f); p.push(q[0].toFixed(1) + ',' + q[1].toFixed(1)); }
+    s += '<polygon points="' + p.join(' ') + '" fill="none" stroke="#e8e0d4" stroke-width="1"/>';
+  });
+  /* eixos */
+  for(var i=0;i<n;i++){
+    var q = pt(i, R);
+    s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + q[0].toFixed(1) + '" y2="' + q[1].toFixed(1) + '" stroke="#e8e0d4" stroke-width="1"/>';
+  }
+  /* polígono do resultado */
+  var pts = [];
+  for(var i=0;i<n;i++){
+    var v = Math.max(0.04, pct[DIMS[i].id]/100);
+    var q = pt(i, R*v);
+    pts.push(q[0].toFixed(1) + ',' + q[1].toFixed(1));
+  }
+  s += '<polygon points="' + pts.join(' ') + '" fill="rgba(74,44,94,.22)" stroke="#4a2c5e" stroke-width="2"/>';
+
+  /* pontos e rótulos */
+  for(var i=0;i<n;i++){
+    var v = Math.max(0.04, pct[DIMS[i].id]/100);
+    var q = pt(i, R*v);
+    s += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="3.2" fill="#4a2c5e"/>';
+
+    var lx = cx + Math.cos(ang[i])*(R+22);
+    var ly = cy + Math.sin(ang[i])*(R+16);
+    var anchor = Math.abs(Math.cos(ang[i])) < 0.3 ? 'middle' : (Math.cos(ang[i]) > 0 ? 'start' : 'end');
+    s += '<text x="' + lx.toFixed(1) + '" y="' + (ly+3).toFixed(1) + '" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#4a2c5e" text-anchor="' + anchor + '">' + DIMS[i].short + '</text>';
+    s += '<text x="' + lx.toFixed(1) + '" y="' + (ly+14).toFixed(1) + '" font-family="Inter,sans-serif" font-size="8.5" fill="#8a7a96" text-anchor="' + anchor + '">' + pct[DIMS[i].id] + '%</text>';
+  }
+
+  s += '</svg>';
+  $('r-radar').innerHTML = s;
+}
+
+/* ============================================================
+   ENVIO / CÓPIA
+   ============================================================ */
+function enviarResultado(){
+  if(!ultimoResumo){ toast('Faça o teste primeiro 🙂'); return; }
+  var num = (CONFIG.whatsapp || '').replace(/\D/g,'');
+  if(num.length < 10){
+    toast('Número de WhatsApp ainda não configurado nesta página');
+    return;
+  }
+  var msg = 'Olá, Keila! Fiz o teste de nível completo.\n\n' + ultimoResumo;
+  window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+}
+function copiarResultado(){
+  if(!ultimoResumo){ toast('Faça o teste primeiro 🙂'); return; }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ultimoResumo)
+      .then(function(){ toast('Resultado copiado ✅ pode colar no WhatsApp'); })
+      .catch(function(){ fallbackCopy(ultimoResumo); });
+  } else { fallbackCopy(ultimoResumo); }
+}
+function fallbackCopy(txt){
+  var ta = document.createElement('textarea');
+  ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); toast('Resultado copiado ✅'); }
+  catch(e){ toast('Não consegui copiar — tire um print da tela'); }
+  document.body.removeChild(ta);
+}
+
+/* ============================================================
+   EVENTOS
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', function(){
+  $('btn-start').addEventListener('click', function(){
+    var c = $('in-aluno'); nomeAluno = c ? c.value.trim() : '';
+    try{ ctx(); }catch(e){}
+    idx = 0; answers = {}; rangeLow = null; rangeHigh = null; agudoPts = null; ultimoResumo = '';
+    renderQ(); show('scr-quiz');
+  });
+
+  $('btn-play').addEventListener('click', function(){
+    if(currentQ && currentQ.seq){
+      playSeq(currentQ.seq);
+      plays++;
+      $('audio-count').textContent = 'Reproduções: ' + plays + ' · pode ouvir quantas quiser';
+    }
+  });
+
+  $('btn-next').addEventListener('click', nextQ);
+  $('btn-back').addEventListener('click', prevQ);
+  $('btn-finish').addEventListener('click', renderResult);
+  $('btn-send').addEventListener('click', enviarResultado);
+  $('btn-copy').addEventListener('click', copiarResultado);
+  $('btn-restart').addEventListener('click', function(){
+    idx = 0; answers = {}; rangeLow = null; rangeHigh = null; agudoPts = null;
+    ultimoResumo = ''; show('scr-intro');
+  });
+});
+</script>
+
+<script>
+/* ===== PORTÃO DE SENHA (troque SENHA abaixo para mudar) ===== */
+(function(){
+  var SENHA = 'keila2026';
+  var KEY = 'vocal_liberado';
+  function h(s){ var x=5381; for(var i=0;i<s.length;i++){ x=((x*33)+s.charCodeAt(i))>>>0; } return x.toString(36); }
+  var gate = document.getElementById('gate');
+  if(!gate) return;
+  function unlock(){ gate.classList.add('hide'); try{ sessionStorage.setItem(KEY,'1'); }catch(e){} }
+  try{ if(sessionStorage.getItem(KEY)==='1'){ unlock(); return; } }catch(e){}
+  var inp = document.getElementById('gate-pass');
+  var btn = document.getElementById('gate-btn');
+  var err = document.getElementById('gate-err');
+  function tentar(){
+    var v = inp.value.trim().toLowerCase();
+    if(!v){ err.textContent='Digite a senha.'; return; }
+    if(h(v) === h(SENHA)){ unlock(); }
+    else { err.textContent='Senha incorreta. Confira com a Keila.'; inp.value=''; inp.focus(); }
+  }
+  btn.addEventListener('click', tentar);
+  inp.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); tentar(); } });
+  setTimeout(function(){ try{ inp.focus(); }catch(e){} }, 350);
+})();
+</script>
+</body>
+</html>
